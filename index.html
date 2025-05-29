@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,51 +7,60 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <div class="container">
-    <h2>Tạo chữ ký email</h2>
-    <form id="signatureForm">
-      <div class="form-group">
-        <label for="templateSelector">Chọn mẫu chữ ký:</label>
-        <select id="templateSelector">
-          <!-- Các option sẽ được thêm bằng JavaScript -->
-        </select>
-      </div>
+  <div class="app-container"> <!-- Container chính cho toàn bộ ứng dụng -->
+    <header class="app-header">
+        <h2>Tạo chữ ký email</h2>
+    </header>
 
-      <div class="form-group">
-        <label for="name">Họ và tên:</label>
-        <input type="text" id="name" required>
-      </div>
+    <main class="main-content">
+        <div class="form-column">
+            <form id="signatureForm">
+                <div class="form-group">
+                    <label for="templateSelector">Chọn mẫu chữ ký:</label>
+                    <select id="templateSelector">
+                        <!-- Các option sẽ được thêm bằng JavaScript -->
+                    </select>
+                </div>
 
-      <div class="form-group">
-        <label for="chucvu">Title:</label>
-        <input type="text" id="chucvu" required>
-      </div>
+                <div class="form-group">
+                    <label for="name">Tên & Họ:</label>
+                    <input type="text" id="name" placeholder="Quynh Le" required>
+                </div>
 
-      <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" id="email" required>
-      </div>
+                <div class="form-group">
+                    <label for="chucvu">Title:</label>
+                    <input type="text" id="chucvu" placeholder="Account Executive" required>
+                </div>
 
-      <div class="form-group">
-        <label for="phone">Số điện thoại:</label>
-        <input type="text" id="phone" placeholder="Bỏ số 0 đầu tiên">
-      </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" placeholder="quynh-le@thehuntergroup.asia" required>
+                </div>
 
-      <button type="submit" class="btn btn-primary">Tạo chữ ký</button>
-    </form>
+                <div class="form-group">
+                    <label for="phone">Số điện thoại:</label>
+                    <input type="text" id="phone" placeholder="Bỏ số 0 đầu tiên - vd: 935302192">
+                </div>
 
-    <h3>Xem trước chữ ký:</h3>
-    <div id="preview">
-      <!-- Nội dung xem trước sẽ ở đây -->
-    </div>
-    
-    <div class="action-buttons">
-      <button id="downloadBtn" class="btn btn-secondary" style="display:none;">Tải file HTML</button>
-      <button id="copyBtn" class="btn btn-secondary" style="display:none;">Copy chữ ký</button>
-    </div>
+                <button type="submit" class="btn btn-primary">Tạo chữ ký</button>
+            </form>
+        </div>
+
+        <div class="preview-column">
+            <h3>Xem trước chữ ký:</h3>
+            <div id="preview">
+                <!-- Nội dung xem trước sẽ ở đây -->
+            </div>
+            
+            <div class="action-buttons">
+                <button id="downloadBtn" class="btn btn-secondary" style="display:none;">Tải file HTML</button>
+                <button id="copyBtn" class="btn btn-secondary" style="display:none;">Copy chữ ký</button>
+            </div>
+        </div>
+    </main>
   </div>
 
   <script src="script.js"></script>
