@@ -7,16 +7,15 @@
 <body>
   <h2>Tạo chữ ký email CHs</h2>
   <form id="signatureForm">
+    <label>Chọn mẫu chữ ký:
+      <select id="templateSelector">
+        <!-- Các option sẽ được thêm bằng JavaScript -->
+      </select>
+    </label><br><br>
     <label>Họ và tên: <input type="text" id="name" required></label><br><br>
     <label>Title: <input type="text" id="chucvu" required></label><br><br>
     <label>Email: <input type="email" id="email" required></label><br><br>
     <label>Số điện thoại: <input type="text" id="phone" placeholder="Bỏ số 0 đầu tiên"></label><br><br>
-    <label>Chọn mẫu chữ ký:
-  <select id="templateSelector">
-    <option value="chs">CHs</option>
-    <option value="ho">HunterOne</option>
-  </select>
-</label><br><br>
     <button type="submit">Tạo chữ ký</button>
   </form>
 
