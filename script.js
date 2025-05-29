@@ -10,18 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const templateSelector = document.getElementById("templateSelector");
 
   let currentHtml = "";
-  let currentTemplateContent = ""; // Biến lưu trữ nội dung template đã load
+  let currentTemplateContent = "";
 
-  // Danh sách các template có sẵn
-  // 'name' là tên hiển thị, 'file' là tên file HTML của template
   const availableTemplates = [
-    { name: "Mẫu CHS", file: "chs.html" },
-    { name: "Mẫu HO", file: "ho.html" },
-    // Thêm các mẫu khác vào đây
-    // { name: "Mẫu XYZ", file: "xyz-template.html" }
+    { name: "Mẫu CHS", file: "chs.html" }, // Đảm bảo tên file chính xác
+    { name: "Mẫu HO", file: "ho.html" },   // Đảm bảo tên file chính xác
   ];
 
-  // Hàm để điền các lựa chọn vào dropdown
   function populateTemplateSelector() {
     availableTemplates.forEach(template => {
       const option = document.createElement("option");
@@ -29,22 +24,22 @@ document.addEventListener('DOMContentLoaded', () => {
       option.textContent = template.name;
       templateSelector.appendChild(option);
     });
-    // Tự động load template đầu tiên
     if (availableTemplates.length > 0) {
       loadTemplate(availableTemplates[0].file);
     }
   }
 
-  // Hàm để load nội dung của một file template
   async function loadTemplate(templateFile) {
     try {
-      const response = await fetch(templateFile);
+      // ---- SỬA ĐỔI Ở ĐÂY ----
+      const response = await fetch(`./${templateFile}`);
+      // ---- KẾT THÚC SỬA ĐỔI ----
       if (!response.ok) {
-        throw new Error(`Không thể tải template: ${response.statusText}`);
+        // Thêm thông tin URL vào lỗi để dễ debug
+        throw new Error(`Không thể tải template: ${response.statusText} (URL: ${response.url})`);
       }
       currentTemplateContent = await response.text();
-      // Sau khi load template, nếu có dữ liệu form thì cập nhật preview
-      if (nameInput.value) { 
+      if (nameInput.value || chucvuInput.value || emailInput.value || phoneInput.value) {
         generateSignature();
       } else {
         previewDiv.innerHTML = '<i>Vui lòng chọn template và điền thông tin.</i>';
@@ -52,14 +47,14 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
       console.error("Lỗi load template:", error);
       previewDiv.innerHTML = `<p style="color:red;">Lỗi: ${error.message}. Vui lòng kiểm tra console.</p>`;
-      currentTemplateContent = ""; // Reset để tránh dùng template lỗi
+      currentTemplateContent = "";
     }
   }
 
-  // Hàm tạo và hiển thị chữ ký
   function generateSignature() {
     if (!currentTemplateContent) {
-      alert("Vui lòng chọn một mẫu chữ ký và đợi nó tải xong.");
+      alert("Vui lòng chọn một mẫu chữ ký và đợi nó tải xong, hoặc kiểm tra lỗi ở console.");
+      previewDiv.innerHTML = `<p style="color:red;">Chưa có nội dung template. Vui lòng chọn lại hoặc kiểm tra lỗi.</p>`;
       return;
     }
 
@@ -73,16 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/{{chucvu}}/g, chucvu)
       .replace(/{{email}}/g, email);
 
-    // Xử lý placeholder {{phone}} và điều kiện {{#if phone}} (đơn giản)
     if (phone) {
         filled = filled.replace(/{{phone}}/g, phone)
-                       .replace(/{{#if phone}}([\s\S]*?){{\/if}}/g, '$1'); // Giữ lại nội dung bên trong if
+                       .replace(/{{#if phone}}([\s\S]*?){{\/if}}/g, '$1');
     } else {
-        filled = filled.replace(/\(\+84\) {{phone}}/g, "") // Xóa cả prefix nếu phone rỗng cho template CHS
-                       .replace(/{{phone}}/g, "") 
-                       .replace(/{{#if phone}}([\s\S]*?){{\/if}}/g, ''); // Xóa toàn bộ khối if
+        filled = filled.replace(/\(\+84\) {{phone}}/g, "")
+                       .replace(/{{phone}}/g, "")
+                       .replace(/{{#if phone}}([\s\S]*?){{\/if}}/g, '');
     }
-
 
     currentHtml = filled;
     previewDiv.innerHTML = filled;
@@ -90,18 +83,15 @@ document.addEventListener('DOMContentLoaded', () => {
     copyBtn.style.display = "inline-block";
   }
 
-  // Sự kiện thay đổi template
   templateSelector.addEventListener("change", (e) => {
     loadTemplate(e.target.value);
   });
 
-  // Sự kiện submit form
   signatureForm.addEventListener("submit", function(e) {
     e.preventDefault();
     generateSignature();
   });
 
-  // Sự kiện copy
   copyBtn.addEventListener("click", () => {
     const range = document.createRange();
     range.selectNodeContents(previewDiv);
@@ -119,7 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
     selection.removeAllRanges();
   });
 
-  // Sự kiện download
   downloadBtn.addEventListener("click", () => {
     if (!currentHtml) {
       alert("Chưa có chữ ký để tải.");
@@ -135,6 +124,5 @@ document.addEventListener('DOMContentLoaded', () => {
     URL.revokeObjectURL(a.href);
   });
 
-  // Khởi tạo
   populateTemplateSelector();
 });
