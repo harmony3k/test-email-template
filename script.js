@@ -13,8 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentTemplateContent = "";
 
   const availableTemplates = [
-    { name: "Mẫu CHS", file: "chs.html" }, // Đảm bảo tên file chính xác
-    { name: "Mẫu HO", file: "ho.html" },   // Đảm bảo tên file chính xác
+    { name: "Creativehunts", file: "chs.html" }, // Đảm bảo tên file chính xác
+    { name: "HunterOne", file: "ho.html" },   // Đảm bảo tên file chính xác
+    { name: "Nar8", file: "nar8.html" },   // Đảm bảo tên file chính xác
   ];
 
   function populateTemplateSelector() {
