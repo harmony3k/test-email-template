@@ -61,7 +61,8 @@ body {
 }
 
 .form-column {
-    flex: 1; /* Cột form chiếm không gian còn lại, hoặc đặt width cụ thể */
+    flex: 1;
+    box-sizing: border-box;/* Cột form chiếm không gian còn lại, hoặc đặt width cụ thể */
     /* min-width: 350px; */ /* Đảm bảo form không quá hẹp */
 }
 
@@ -69,6 +70,7 @@ body {
     flex: 1.2; /* Cột preview có thể rộng hơn một chút, hoặc đặt width cụ thể */
     /* min-width: 400px; */
     display: flex;
+    box-sizing: border-box;
     flex-direction: column; /* Để các nút action ở dưới preview */
 }
 
