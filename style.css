@@ -1,19 +1,20 @@
 /* style.css */
 
 :root {
-    --primary-color: #007bff; /* Màu xanh dương chủ đạo */
+    --primary-color: #007bff;
     --primary-hover-color: #0056b3;
-    --secondary-color: #6c757d; /* Màu xám cho button phụ */
+    --secondary-color: #6c757d;
     --secondary-hover-color: #5a6268;
-    --background-color: #f8f9fa; /* Màu nền trang */
-    --card-background-color: #ffffff; /* Màu nền card/container */
-    --text-color: #212529; /* Màu chữ chính */
+    --background-color: #f4f7f6; /* Màu nền trang nhạt hơn chút */
+    --card-background-color: #ffffff;
+    --text-color: #212529;
     --label-color: #495057;
     --border-color: #ced4da;
     --input-focus-border-color: #80bdff;
     --input-focus-box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-    --border-radius: 0.5rem; /* 8px */
-    --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    --border-radius: 0.5rem;
+    --box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.07); /* Bóng đổ nhẹ hơn */
+    --column-gap: 30px; /* Khoảng cách giữa các cột */
 }
 
 body {
@@ -21,43 +22,63 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     margin: 0;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Căn trên để không bị nhảy khi nội dung thay đổi */
-    min-height: 100vh;
-    box-sizing: border-box;
     line-height: 1.6;
+    /* Xóa display: flex, justify-content, align-items từ body, 
+       vì app-container sẽ xử lý căn giữa */
 }
 
-.container {
+.app-container {
+    width: 100%;
+    max-width: 1200px; /* Hoặc một max-width lớn hơn cho layout 2 cột */
+    margin: 0 auto;
+    padding: 30px 20px; /* Padding cho toàn bộ app */
+    box-sizing: border-box;
+}
+
+.app-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.app-header h2 {
+    font-size: 2.25rem;
+    color: var(--text-color);
+    font-weight: 700;
+    margin: 0;
+}
+
+.main-content {
+    display: flex;
+    gap: var(--column-gap);
+}
+
+.form-column,
+.preview-column {
     background-color: var(--card-background-color);
-    padding: 30px 40px;
+    padding: 30px;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
-    width: 100%;
-    max-width: 650px;
-    margin-top: 20px;
-    margin-bottom: 20px;
 }
 
-h2, h3 {
+.form-column {
+    flex: 1; /* Cột form chiếm không gian còn lại, hoặc đặt width cụ thể */
+    /* min-width: 350px; */ /* Đảm bảo form không quá hẹp */
+}
+
+.preview-column {
+    flex: 1.2; /* Cột preview có thể rộng hơn một chút, hoặc đặt width cụ thể */
+    /* min-width: 400px; */
+    display: flex;
+    flex-direction: column; /* Để các nút action ở dưới preview */
+}
+
+h3 { /* Tiêu đề của Preview Column */
     color: var(--text-color);
-    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 0; /* Reset margin-top cho h3 trong cột */
     margin-bottom: 1.5em;
     font-weight: 600;
-}
-
-h2 {
-    font-size: 2rem;
-    margin-top: 0;
-}
-
-h3 {
-    font-size: 1.5rem;
-    margin-top: 2.5em;
-    border-top: 1px solid #e9ecef;
-    padding-top: 1.5em;
+    /* Bỏ border-top và padding-top vì nó không còn là dải phân cách nữa */
 }
 
 .form-group {
@@ -70,19 +91,60 @@ label {
     color: var(--label-color);
     margin-bottom: 0.5rem;
 }
+/* ... (các style hiện có của bạn) ... */
 
-input[type="text"],
-input[type="email"],
 select#templateSelector {
     width: 100%;
-    padding: 0.75rem 1rem; /* 12px 16px */
+    padding: 0.75rem 2.5rem 0.75rem 1rem; /* Tăng padding-right để có không gian cho mũi tên mới */
     border: 1px solid var(--border-color);
-    border-radius: calc(var(--border-radius) - 2px); /* Bo tròn nhẹ hơn input */
+    border-radius: calc(var(--border-radius) - 2px);
     box-sizing: border-box;
     font-size: 1rem;
     font-family: 'Inter', sans-serif;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    background-color: #fff; /* Đảm bảo nền trắng cho select trên một số hệ thống */
+    background-color: #fff;
+
+    /* Loại bỏ giao diện mặc định của select */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    /* Thêm mũi tên tùy chỉnh */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%236c757d'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 01.753 1.659l-4.796 5.48a1 1 0 01-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center; /* Căn mũi tên sang phải và giữa theo chiều dọc */
+    background-size: 16px 12px; /* Kích thước của mũi tên */
+}
+
+/* Chỉ áp dụng cho IE10+ (nếu cần hỗ trợ) */
+select#templateSelector::-ms-expand {
+    display: none;
+}
+
+
+/* Khi focus, bạn có thể muốn thay đổi màu mũi tên nếu cần */
+/* Ví dụ:
+select#templateSelector:focus {
+    outline: none;
+    border-color: var(--input-focus-border-color);
+    box-shadow: var(--input-focus-box-shadow);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23007bff'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 01.753 1.659l-4.796 5.48a1 1 0 01-1.506 0z'/%3E%3C/svg%3E");
+}
+*/
+
+/* ... (phần còn lại của style.css) ... */
+input[type="text"],
+input[type="email"],
+select#templateSelector {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: calc(var(--border-radius) - 2px);
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    background-color: #fff;
 }
 
 input[type="text"]:focus,
@@ -94,7 +156,7 @@ select#templateSelector:focus {
 }
 
 input::placeholder {
-    color: #6c757d;
+    color: #999; /* Nhạt hơn một chút */
     opacity: 1;
 }
 
@@ -107,12 +169,12 @@ input::placeholder {
     user-select: none;
     background-color: transparent;
     border: 1px solid transparent;
-    padding: 0.75rem 1.25rem; /* 12px 20px */
+    padding: 0.75rem 1.25rem;
     font-size: 1rem;
     border-radius: var(--border-radius);
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     font-family: 'Inter', sans-serif;
-    width: 100%; /* Nút chính chiếm toàn bộ chiều rộng */
+    width: 100%;
     box-sizing: border-box;
 }
 
@@ -140,44 +202,59 @@ input::placeholder {
 
 .action-buttons {
     display: flex;
-    gap: 1rem; /* Khoảng cách giữa các button */
-    margin-top: 1.5rem;
+    gap: 1rem;
+    margin-top: auto; /* Đẩy các nút xuống dưới cùng của .preview-column */
+    padding-top: 1.5rem; /* Khoảng cách với preview content */
 }
 
 .action-buttons .btn {
-    flex-grow: 1; /* Các button chia đều không gian */
+    flex-grow: 1;
 }
 
 
 #preview {
     border: 1px solid #e0e0e0;
     padding: 20px;
-    margin-top: 1rem; /* Giảm margin top một chút */
     border-radius: var(--border-radius);
-    background-color: #fdfdfd; /* Nền hơi khác với nền trang */
-    min-height: 100px;
-    overflow-x: auto; /* Cho phép cuộn ngang nếu chữ ký quá rộng */
+    background-color: #fdfdfd;
+    min-height: 200px; /* Tăng chiều cao tối thiểu cho preview */
+    overflow: auto; /* Cho phép cuộn cả ngang và dọc nếu cần */
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+    flex-grow: 1; /* Cho phép preview box co giãn theo chiều cao */
 }
-/* Đảm bảo bảng trong preview không bị ảnh hưởng ngoài ý muốn */
+
 #preview table {
-    margin-left: 0 !important; /* Reset margin từ template nếu nó dùng margin: auto */
+    margin-left: 0 !important;
     margin-right: 0 !important;
 }
 
-
 /* Responsive adjustments */
+@media (max-width: 992px) { /* Điểm ngắt cho tablet */
+    .main-content {
+        flex-direction: column; /* Chuyển thành layout 1 cột */
+    }
+    .form-column, .preview-column {
+        flex-basis: auto; /* Reset flex-basis */
+        width: 100%; /* Chiếm toàn bộ chiều rộng khi xếp chồng */
+    }
+    .preview-column {
+        margin-top: var(--column-gap); /* Thêm khoảng cách khi xếp chồng */
+    }
+}
+
+
 @media (max-width: 768px) {
-    .container {
+    .app-container {
+        padding: 20px 15px;
+    }
+    .app-header h2 {
+        font-size: 2rem;
+    }
+    .form-column, .preview-column {
         padding: 20px;
-        margin-left: 10px;
-        margin-right: 10px;
     }
-    h2 {
-        font-size: 1.75rem;
-    }
-    h3 {
-        font-size: 1.25rem;
+     h3 {
+        font-size: 1.35rem;
     }
 }
 
@@ -187,9 +264,9 @@ input::placeholder {
         font-size: 0.9rem;
     }
     .action-buttons {
-        flex-direction: column; /* Xếp chồng nút trên màn hình rất nhỏ */
+        flex-direction: column;
     }
     .action-buttons .btn {
-        width: 100%; /* Các nút trong action-buttons chiếm toàn bộ chiều rộng */
+        width: 100%;
     }
 }
