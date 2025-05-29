@@ -1,4 +1,3 @@
-
 let currentHtml = "";
 
 document.getElementById("signatureForm").addEventListener("submit", async function (e) {
