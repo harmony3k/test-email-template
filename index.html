@@ -2,28 +2,57 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Generator chữ ký email</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h2>Tạo chữ ký email CHs</h2>
-  <form id="signatureForm">
-    <label>Chọn mẫu chữ ký:
-      <select id="templateSelector">
-        <!-- Các option sẽ được thêm bằng JavaScript -->
-      </select>
-    </label><br><br>
-    <label>Họ và tên: <input type="text" id="name" required></label><br><br>
-    <label>Title: <input type="text" id="chucvu" required></label><br><br>
-    <label>Email: <input type="email" id="email" required></label><br><br>
-    <label>Số điện thoại: <input type="text" id="phone" placeholder="Bỏ số 0 đầu tiên"></label><br><br>
-    <button type="submit">Tạo chữ ký</button>
-  </form>
+  <div class="container">
+    <h2>Tạo chữ ký email</h2>
+    <form id="signatureForm">
+      <div class="form-group">
+        <label for="templateSelector">Chọn mẫu chữ ký:</label>
+        <select id="templateSelector">
+          <!-- Các option sẽ được thêm bằng JavaScript -->
+        </select>
+      </div>
 
-  <h3>Xem trước chữ ký:</h3>
-  <div id="preview" style="border:1px solid #ccc; padding:10px; margin-top:10px;"></div>
-  <br>
-  <button id="downloadBtn" style="display:none;">Tải file HTML</button>
-  <button id="copyBtn" style="display:none;">Copy chữ ký</button>
+      <div class="form-group">
+        <label for="name">Họ và tên:</label>
+        <input type="text" id="name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="chucvu">Title:</label>
+        <input type="text" id="chucvu" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Số điện thoại:</label>
+        <input type="text" id="phone" placeholder="Bỏ số 0 đầu tiên">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Tạo chữ ký</button>
+    </form>
+
+    <h3>Xem trước chữ ký:</h3>
+    <div id="preview">
+      <!-- Nội dung xem trước sẽ ở đây -->
+    </div>
+    
+    <div class="action-buttons">
+      <button id="downloadBtn" class="btn btn-secondary" style="display:none;">Tải file HTML</button>
+      <button id="copyBtn" class="btn btn-secondary" style="display:none;">Copy chữ ký</button>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
