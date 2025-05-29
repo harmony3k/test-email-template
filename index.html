@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Generator chữ ký email</title>
+</head>
+<body>
+  <h2>Tạo chữ ký email CHs</h2>
+  <form id="signatureForm">
+    <label>Họ và tên: <input type="text" id="name" required></label><br><br>
+    <label>Title: <input type="text" id="chucvu" required></label><br><br>
+    <label>Email: <input type="email" id="email" required></label><br><br>
+    <label>Số điện thoại: <input type="text" id="phone" placeholder="Bỏ số 0 đầu tiên"></label><br><br>
+    <label>Chọn mẫu chữ ký:
+  <select id="templateSelector">
+    <option value="chs">CHs</option>
+    <option value="ho">HunterOne</option>
+  </select>
+</label><br><br>
+    <button type="submit">Tạo chữ ký</button>
+  </form>
+
+  <h3>Xem trước chữ ký:</h3>
+  <div id="preview" style="border:1px solid #ccc; padding:10px; margin-top:10px;"></div>
+  <br>
+  <button id="downloadBtn" style="display:none;">Tải file HTML</button>
+  <button id="copyBtn" style="display:none;">Copy chữ ký</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
