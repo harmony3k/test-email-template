@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: "Creativehunts", file: "chs.html" }, // Đảm bảo tên file chính xác
     { name: "HunterOne", file: "ho.html" },   // Đảm bảo tên file chính xác
     { name: "Nar8", file: "nar8.html" },   // Đảm bảo tên file chính xác
+    { name: "Pridehunts", file: "pridehunts.html" },   // Đảm bảo tên file chính xác
   ];
 
   function populateTemplateSelector() {
