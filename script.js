@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentTemplateContent = "";
 
   const availableTemplates = [
+    { name: "The Hunter Group", file: "thg.html" }, // Đảm bảo tên file chính xác
     { name: "Creativehunts", file: "chs.html" }, // Đảm bảo tên file chính xác
     { name: "HunterOne", file: "ho.html" },   // Đảm bảo tên file chính xác
     { name: "Nar8", file: "nar8.html" },   // Đảm bảo tên file chính xác
